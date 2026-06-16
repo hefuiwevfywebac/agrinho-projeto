@@ -1,172 +1,92 @@
-/* Configurações Gerais */
+/* CONFIGURAÇÕES GERAIS */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #f9f9f6;
-    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
+    color: #333;
+    background-color: #f4f9f4;
 }
 
 .container {
     width: 90%;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
-/* Cabeçalho */
+/* CABEÇALHO */
 header {
-    background-color: #ffffff;
-    padding: 20px 0;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.header-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2e7d32;
-}
-
-.logo span {
-    color: #689f38;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-}
-
-nav ul li {
-    margin-left: 20px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #555;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #2e7d32;
-}
-
-/* Banner Hero */
-.hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://unsplash.com') no-repeat center center/cover;
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    color: #fff;
+    background: linear-gradient(135deg, #1e4620, #2e7d32);
+    color: white;
+    padding: 60px 0;
     text-align: center;
+    border-bottom: 5px solid #81c784;
 }
 
-.hero-content h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+header h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
 }
 
-.hero-content p {
-    font-size: 20px;
-    margin-bottom: 30px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+header p {
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-top: 10px;
+    color: #e8f5e9;
 }
 
-.btn {
-    display: inline-block;
-    background-color: #2e7d32;
-    color: #fff;
-    padding: 12px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background 0.3s;
+/* CORPO DO TEXTO (CONTEÚDO) */
+main {
+    padding: 40px 0;
 }
 
-.btn:hover {
-    background-color: #1b5e20;
-}
-
-/* Pilares */
-.pillars {
-    padding: 80px 0;
-    background-color: #fff;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 32px;
-    color: #2e7d32;
-    margin-bottom: 50px;
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.card {
-    background-color: #f1f8e9;
+section {
+    background: white;
     padding: 30px;
+    margin-bottom: 30px;
     border-radius: 8px;
-    text-align: center;
-    transition: transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card .icon {
-    font-size: 40px;
+h2 {
+    color: #2e7d32;
     margin-bottom: 15px;
+    border-left: 5px solid #81c784;
+    padding-left: 10px;
 }
 
-.card h3 {
+p {
     margin-bottom: 15px;
-    color: #1b5e20;
+    font-size: 1.1rem;
+    text-align: justify;
 }
 
-/* Sobre */
-.about {
-    padding: 80px 0;
-    background-color: #efebe9;
+ul {
+    list-style-position: inside;
+    margin-top: 10px;
 }
 
-.about-text h2 {
-    font-size: 32px;
-    color: #4e342e;
-    margin-bottom: 20px;
+ul li {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
 }
 
-.about-text p {
-    margin-bottom: 15px;
-    font-size: 18px;
-    color: #5d4037;
+/* FINALIDADE (DESTAQUE) */
+.finalidade {
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
 }
 
-/* Rodapé */
+/* RODAPÉ */
 footer {
-    background-color: #1b5e20;
-    color: #fff;
+    background-color: #1e4620;
+    color: white;
     text-align: center;
-    padding: 30px 0;
-    font-size: 14px;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    margin-top: 40px;
 }
