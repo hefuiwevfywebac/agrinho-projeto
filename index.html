@@ -3,49 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agroforte: Futuro Sustentável</title>
+    <title>AgroForte: Futuro Sustentável</title>
+    <!-- CSS do Leaflet para o funcionamento do mapa real -->
+    <link rel="stylesheet" href="https://unpkg.com" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- CABEÇALHO DO SITE -->
-    <header>
-        <div class="container">
-            <h1>Agroforte</h1>
-            <p>Futuro Sustentável</p>
-        </div>
+    <header class="main-header">
+        <h1>AgroForte</h1>
+        <p>Inovação, Produtividade e Tecnologia Ambiental para o Campo</p>
     </header>
 
-    <!-- CORPO DO TEXTO (CONCEITO E FOCO) -->
-    <main class="container">
-        <section class="conteudo-principal">
-            <h2>O que é a Agroforte?</h2>
-            <p>A <strong>Agroforte</strong> é um movimento e um modelo de produção que une a força do agronegócio tradicional às mais avançadas práticas de preservação ambiental. O conceito central do tema baseia-se na <strong>sustentabilidade produtiva</strong>: a certeza de que é possível alimentar a população global crescente sem esgotar os recursos naturais do nosso planeta.</p>
-            
-            <p>Este conceito redefine a relação entre o homem e o campo, transformando a tecnologia e a preservação em aliadas da produtividade. Não se trata apenas de produzir menos para poluir menos, mas sim de produzir mais e melhor através do uso inteligente da terra, da água e da energia.</p>
-        </section>
+    <!-- Barra de Navegação Superior estilo Dashboard -->
+    <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('simulador')">📊 Simulador de Impacto</button>
+        <button class="tab-btn" onclick="switchTab('mapa-aba')">🗺️ Mapa do Futuro Real</button>
+    </nav>
 
-        <section class="foco-principal">
-            <h2>Qual é o Foco Principal?</h2>
-            <p>O foco principal da Agroforte está ancorado em três pilares fundamentais:</p>
-            <ul>
-                <li><strong>Eficiência Tecnológica:</strong> Uso de agricultura de precisão, drones e inteligência artificial para otimizar insumos e reduzir desperdícios.</li>
-                <li><strong>Regeneração Ambiental:</strong> Práticas que recuperam o solo, protegem nascentes e reduzem a pegada de carbono no campo.</li>
-                <li><strong>Viabilidade Econômica:</strong> Provar que a sustentabilidade aumenta os lucros do produtor rural a longo prazo através da economia de recursos.</li>
-            </ul>
-        </section>
+    <!-- CONTAINER DA ABA 1: SIMULADOR -->
+    <main id="simulador" class="tab-content active-content">
+        <div class="container">
+            <section class="card">
+                <h2>Simulador de Impacto Agro Sustentável</h2>
+                
+                <!-- Texto explicativo sobre o que é e o que fazer -->
+                <div class="instruction-box">
+                    <p><strong>O que é:</strong> Uma ferramenta matemática que projeta os benefícios ambientais de métodos agrícolas modernos.</p>
+                    <p><strong>O que fazer:</strong> Digite o tamanho da sua área produtiva em hectares, escolha a prática sustentável aplicada e clique em calcular para ver a estimativa de CO₂ retido e água economizada.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hectares">Tamanho da Área (em Hectares):</label>
+                    <input type="number" id="hectares" placeholder="Ex: 50" min="1">
+                </div>
 
-        <!-- FINALIDADE DO SITE -->
-        <section class="finalidade">
-            <h2>Nossa Finalidade</h2>
-            <p>A finalidade deste projeto é servir como um hub de conscientização e inovação. Queremos conectar produtores rurais, estudantes, tecnólogos e defensores do meio ambiente para compartilhar soluções práticas. Este espaço busca inspirar a transição global para uma agricultura que protege a biodiversidade e garante a segurança alimentar das próximas gerações.</p>
-        </section>
+                <div class="form-group">
+                    <label for="pratica">Principal Prática Sustentável:</label>
+                    <select id="pratica">
+                        <option value="direto">Plantio Direto (Retenção de Carbono)</option>
+                        <option value="rotacao">Rotação de Culturas (Saúde do Solo)</option>
+                        <option value="ILPF">Integração Lavoura-Pecuária-Floresta (ILPF)</option>
+                    </select>
+                </div>
+
+                <button class="btn-calc" onclick="calcularImpacto()">Calcular Futuro Sustentável</button>
+
+                <div class="results" id="resultadoPainel">
+                    <div class="result-box">
+                        <p>CO₂ Retido / Ano</p>
+                        <span id="co2Resultado">0 kg</span>
+                    </div>
+                    <div class="result-box">
+                        <p>Água Preservada</p>
+                        <span id="aguaResultado">0 L</span>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <!-- RODAPÉ -->
-    <footer>
-        <p>&copy; 2026 Agroforte Futuro Sustentável. Projeto para o GitHub.</p>
+    <!-- CONTAINER DA ABA 2: MAPA GEOGRÁFICO -->
+    <main id="mapa-aba" class="tab-content">
+        <!-- Texto explicativo sobre o que é e o que fazer no mapa -->
+        <div class="map-instruction">
+            <p><strong>O que é o Mapa do Futuro Real:</strong> Um mapa interativo geográfico que conecta você aos polos e usinas agrícolas reais mais avançados do Brasil.</p>
+            <p><strong>O que fazer:</strong> Navegue pelo território brasileiro e <strong>clique nos marcadores azuis</strong> instalados no mapa para abrir os dados detalhados e o impacto ecológico de cada região no painel ao lado.</p>
+        </div>
+
+        <div class="map-container">
+            <div id="mapa"></div>
+
+            <aside class="info-panel" id="painelInfo">
+                <div class="panel-placeholder" id="placeholderText">
+                    <span class="icon-pulse">📍</span>
+                    <h3>Explore o Campo</h3>
+                    <p>Clique em um dos marcadores azuis no mapa para revelar a tecnologia e o impacto ambiental da região.</p>
+                </div>
+                <div class="panel-content hidden" id="panelContent">
+                    <span id="infoIcon" class="info-icon">🌱</span>
+                    <h2 id="infoTitulo">Tecnologia</h2>
+                    <p class="location-tag">📍 <span id="infoLocal">Localização</span></p>
+                    <div class="divider"></div>
+                    <p id="infoDesc">Descrição da tecnologia aplicada no local.</p>
+                    <div class="impact-badge">
+                        <strong>Impacto Ecológico Direto:</strong>
+                        <p id="infoImpacto">Dados de impacto ambiental.</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 AgroForte - Desenvolvido para um Amanhã Melhor</p>
     </footer>
 
+    <!-- Scripts do Leaflet e Lógica do Dashboard -->
+    <script src="https://unpkg.com"></script>
+    <script>
+        // --- GERENCIAMENTO DE ABAS ---
+        let mapInitialized = false;
+        let map;
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active-content'));
+
+            event.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active-content');
+
+            if (tabId === 'mapa-aba' && !mapInitialized) {
+                setTimeout(() => {
+                    initMap();
+                }, 100);
+            }
+        }
+
+        // --- LÓGICA DO SIMULADOR ---
+        function calcularImpacto() {
+            const hectares = parseFloat(document.getElementById('hectares').value);
+            const pratica = document.getElementById('pratica').value;
+            
+            if (isNaN(hectares) || hectares <= 0) {
+                alert('Por favor, insira um número válido de hectares.');
+                return;
+            }
+
+            let fCO2 = pratica === 'direto' ? 1200 : (pratica === 'rotacao' ? 800 : 2500);
+            let fAgua = pratica === 'direto' ? 15000 : (pratica === 'rotacao' ? 25000 : 30000);
+
+            document.getElementById('co2Resultado').innerText = (hectares * fCO2).toLocaleString('pt-BR') + ' kg';
+            document.getElementById('aguaResultado').innerText = (hectares * fAgua).toLocaleString('pt-BR') + ' L';
+            document.getElementById('resultadoPainel').style.display = 'grid';
+        }
+
+        // --- LÓGICA DO MAPA REAL ---
+        function initMap() {
+            map = L.map('mapa').setView([-14.235, -51.925], 4);
+            mapInitialized = true;
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            const pontos = [
+                { coords: [-22.56, -47.14], titulo: "Fazendas Verticais Hidropônicas", local: "Holambra - SP", icon: "🌱", desc: "Uso de inteligência artificial aplicada ao cultivo vertical indoor. Monitora nutrientes minuto a minuto sem desperdício de espaço ou recursos orgânicos.", impacto: "Economia garantida de 95% de água e eliminação total de defensivos químicos." },
+                { coords: [-12.15, -45.00], titulo: "Drones e Agro de Precisão", local: "Luís Eduardo Magalhães - BA", icon: "🛸", desc: "Frota de drones automáticos que sobrevoam plantações mapeando com precisão milimétrica focos de pragas e estresse hídrico.", impacto: "Redução comprovada de até 40% no desperdício de insumos agrícolas tradicionais." },
+                { coords: [-19.01, -49.46], titulo: "Polo de Integração (ILPF)", local: "Uberaba - MG", icon: "🌳", desc: "Consorciação planejada de grãos, gado e árvores nativas na mesma área, otimizando o ciclo de nitrogênio do solo.", impacto: "Neutralização das emissões de gases através do crescimento florestal acelerado." },
+                { coords: [-16.32, -48.95], titulo: "Usinas Agrivoltaicas", local: "Anápolis - GO", icon: "☀️", desc: "Painéis solares fotovoltaicos suspensos que geram energia limpa enquanto protegem cultivos de hortaliças do calor extremo.", impacto: "Geração distribuída 100% renovável e redução drástica da evapotranspiração do solo." }
+            ];
+
+            pontos.forEach(ponto => {
+                const marker = L.marker(ponto.coords).addTo(map);
+                marker.bindTooltip(`<b>${ponto.titulo}</b>`, { direction: 'top' });
+                marker.on('click', () => {
+                    document.getElementById('placeholderText').classList.add('hidden');
+                    const content = document.getElementById('panelContent');
+                    content.classList.remove('hidden');
+                    
+                    document.getElementById('infoIcon').innerText = ponto.icon;
+                    document.getElementById('infoTitulo').innerText = ponto.titulo;
+                    document.getElementById('infoLocal').innerText = ponto.local;
+                    document.getElementById('infoDesc').innerText = ponto.desc;
+                    document.getElementById('infoImpacto').innerText = ponto.impacto;
+
+                    map.setView(ponto.coords, 7, { animate: true });
+                });
+            });
+        }
+    </script>
 </body>
 </html>
