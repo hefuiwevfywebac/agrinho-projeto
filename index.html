@@ -10,123 +10,123 @@
 </head>
 <body>
 
+    <!-- O MAPA GEOGRÁFICO AGORA É O FUNDO DO SITE INTEIRO -->
+    <div id="mapa"></div>
+
+    <!-- TÍTULO PRINCIPAL FLUTUANTE NO TOPO -->
     <header class="main-header">
         <h1>AgroForte</h1>
-        <p>Inovação, Produtividade e Tecnologia Ambiental para o Campo</p>
+        <p>Inovação e Tecnologia Sustentável para o Campo</p>
     </header>
 
-    <!-- Barra de Navegação Superior centralizada -->
-    <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('simulador')">📊 Simulador de Impacto</button>
-        <button class="tab-btn" onclick="switchTab('mapa-aba')">🗺️ Mapa do Futuro Real</button>
-    </nav>
-
-    <!-- CONTAINER DA ABA 1: SIMULADOR (Totalmente centralizado na tela) -->
-    <main id="simulador" class="tab-content active-content">
-        <div class="center-container">
-            <section class="card">
-                <h2>Simulador de Impacto Agro Sustentável</h2>
-                
-                <div class="instruction-box">
-                    <p><strong>O que é:</strong> Uma ferramenta matemática que projeta os benefícios ambientais de métodos agrícolas modernos.</p>
-                    <p><strong>O que fazer:</strong> Digite o tamanho da sua área produtiva em hectares, escolha a prática sustentável aplicada e clique em calcular para ver a estimativa de CO₂ retido e água economizada.</p>
-                </div>
-                
-                <div class="form-group">
-                    <label for="hectares">Tamanho da Área (em Hectares):</label>
-                    <input type="number" id="hectares" placeholder="Ex: 50" min="1">
-                </div>
-
-                <div class="form-group">
-                    <label for="pratica">Principal Prática Sustentável:</label>
-                    <select id="pratica">
-                        <option value="direto">Plantio Direto (Retenção de Carbono)</option>
-                        <option value="rotacao">Rotação de Culturas (Saúde do Solo)</option>
-                        <option value="ILPF">Integração Lavoura-Pecuária-Floresta (ILPF)</option>
-                    </select>
-                </div>
-
-                <button class="btn-calc" onclick="calcularImpacto()">Calcular Futuro Sustentável</button>
-
-                <div class="results" id="resultadoPainel">
-                    <div class="result-box">
-                        <p>CO₂ Retido / Ano</p>
-                        <span id="co2Resultado">0 kg</span>
-                    </div>
-                    <div class="result-box">
-                        <p>Água Preservada</p>
-                        <span id="aguaResultado">0 L</span>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- CONTAINER DA ABA 2: MAPA GEOGRÁFICO (Organizado Lado a Lado de verdade) -->
-    <main id="mapa-aba" class="tab-content">
-        <div class="map-instruction">
-            <p><strong>O que é o Mapa do Futuro Real:</strong> Um mapa interativo geográfico que conecta você aos polos e usinas agrícolas reais mais avançados do Brasil.</p>
-            <p><strong>O que fazer:</strong> Navegue pelo território brasileiro e <strong>clique nos marcadores azuis</strong> instalados no mapa para abrir os dados detalhados e o impacto ecológico de cada região no painel ao lado.</p>
+    <!-- PAINEL DA ESQUERDA: SIMULADOR DE IMPACTO -->
+    <section class="floating-panel simulator-panel">
+        <h2>📊 Simulador Agro</h2>
+        <p class="panel-desc">Digite a área e veja os benefícios ambientais estimados das práticas agrícolas.</p>
+        
+        <div class="form-group">
+            <label for="hectares">Área (Hectares):</label>
+            <input type="number" id="hectares" placeholder="Ex: 50" min="1">
         </div>
 
-        <div class="map-dashboard-layout">
-            <!-- O mapa fica do lado esquerdo -->
-            <div id="mapa"></div>
-
-            <!-- O painel fica do lado direito de forma limpa e isolada -->
-            <aside class="info-panel" id="painelInfo">
-                <div class="panel-placeholder" id="placeholderText">
-                    <span class="icon-pulse">📍</span>
-                    <h3>Explore o Campo</h3>
-                    <p>Clique em um dos marcadores azuis no mapa para revelar a tecnologia e o impacto ambiental da região.</p>
-                </div>
-                <div class="panel-content hidden" id="panelContent">
-                    <span id="infoIcon" class="info-icon">🌱</span>
-                    <h2 id="infoTitulo">Tecnologia</h2>
-                    <p class="location-tag">📍 <span id="infoLocal">Localização</span></p>
-                    <div class="divider"></div>
-                    <p id="infoDesc">Descrição da tecnologia aplicada no local.</p>
-                    <div class="impact-badge">
-                        <strong>Impacto Ecológico Direto:</strong>
-                        <p id="infoImpacto">Dados de impacto ambiental.</p>
-                    </div>
-                </div>
-            </aside>
+        <div class="form-group">
+            <label for="pratica">Prática Sustentável:</label>
+            <select id="pratica">
+                <option value="direto">Plantio Direto</option>
+                <option value="rotacao">Rotação de Culturas</option>
+                <option value="ILPF">Integração (ILPF)</option>
+            </select>
         </div>
-    </main>
 
-    <footer class="main-footer">
-        <p>&copy; 2026 AgroForte - Desenvolvido para um Amanhã Melhor</p>
-    </footer>
+        <button class="btn-calc" onclick="calcularImpacto()">Calcular Impacto</button>
+
+        <div class="results" id="resultadoPainel">
+            <div class="result-box">
+                <p>CO₂ Retido / Ano</p>
+                <span id="co2Resultado">0 kg</span>
+            </div>
+            <div class="result-box">
+                <p>Água Preservada</p>
+                <span id="aguaResultado">0 L</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAINEL DA DIREITA: EXPLICAÇÃO DO MAPA E DETALHES -->
+    <aside class="floating-panel info-panel">
+        <h2>🗺️ Mapa do Futuro</h2>
+        
+        <!-- Estado Inicial (Antes de clicar em um ponto) -->
+        <div id="placeholderText">
+            <p class="instruction"><strong>O que fazer:</strong> Navegue pelo mapa do Brasil e <strong>clique nos marcadores azuis</strong> para descobrir os polos de tecnologia real do nosso agro.</p>
+            <span class="icon-pulse">📍</span>
+        </div>
+
+        <!-- Estado Ativo (Depois de clicar em um ponto) -->
+        <div class="panel-content hidden" id="panelContent">
+            <div class="header-inline">
+                <span id="infoIcon" class="info-icon">🌱</span>
+                <h3 id="infoTitulo">Tecnologia</h3>
+            </div>
+            <p class="location-tag">📍 <span id="infoLocal">Localização</span></p>
+            <div class="divider"></div>
+            <p id="infoDesc">Descrição detalhada da tecnologia aqui.</p>
+            <div class="impact-badge">
+                <strong>Impacto Ecológico Direto:</strong>
+                <p id="infoImpacto">Dados de impacto.</p>
+            </div>
+        </div>
+    </aside>
 
     <!-- Scripts do Leaflet e Lógica do Dashboard -->
     <script src="https://unpkg.com"></script>
     <script>
-        // --- GERENCIAMENTO DE ABAS ---
-        let mapInitialized = false;
-        let map;
+        // Inicializa o mapa cobrindo o Brasil de forma perfeita
+        const map = L.map('mapa', { zoomControl: false }).setView([-14.235, -51.925], 4);
+        
+        // Reposiciona os botões de Zoom (+ e -) para não sumirem atrás dos painéis
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active-content'));
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
 
-            event.currentTarget.classList.add('active');
-            document.getElementById(tabId).classList.add('active-content');
+        // Banco de dados dos Polos Agro Sustentáveis
+        const pontos = [
+            { coords: [-22.56, -47.14], titulo: "Fazendas Verticais Hidropônicas", local: "Holambra - SP", icon: "🌱", desc: "Cultivo vertical indoor com monitoramento inteligente de nutrientes minuto a minuto.", impacto: "Economia de 95% de água e sem defensivos químicos." },
+            { coords: [-12.15, -45.00], titulo: "Drones e Agro de Precisão", local: "Luís Eduardo Magalhães - BA", icon: "🛸", desc: "Drones automáticos mapeando com precisão focos de pragas e estresse hídrico.", impacto: "Redução de até 40% no desperdício de insumos no campo." },
+            { coords: [-19.01, -49.46], titulo: "Polo de Integração (ILPF)", local: "Uberaba - MG", icon: "🌳", desc: "Consorciação planejada de grãos, gado e árvores nativas na mesma área.", impacto: "Neutralização das emissões através do sequestro florestal." },
+            { coords: [-16.32, -48.95], titulo: "Usinas Agrivoltaicas", local: "Anápolis - GO", icon: "☀️", desc: "Painéis solares gerando energia limpa enquanto protegem hortaliças do calor extremo.", impacto: "Geração 100% limpa e redução da evaporação do solo." }
+        ];
 
-            if (tabId === 'mapa-aba' && !mapInitialized) {
-                setTimeout(() => {
-                    initMap();
-                }, 100);
-            }
-        }
+        // Adiciona marcadores e configura os cliques
+        pontos.forEach(ponto => {
+            const marker = L.marker(ponto.coords).addTo(map);
+            marker.bindTooltip(`<b>${ponto.titulo}</b>`, { direction: 'top' });
+            
+            marker.on('click', () => {
+                document.getElementById('placeholderText').classList.add('hidden');
+                const content = document.getElementById('panelContent');
+                content.classList.remove('hidden');
+                
+                document.getElementById('infoIcon').innerText = ponto.icon;
+                document.getElementById('infoTitulo').innerText = ponto.titulo;
+                document.getElementById('infoLocal').innerText = ponto.local;
+                document.getElementById('infoDesc').innerText = ponto.desc;
+                document.getElementById('infoImpacto').innerText = ponto.impacto;
 
-        // --- LÓGICA DO SIMULADOR ---
+                map.setView(ponto.coords, 6, { animate: true });
+            });
+        });
+
+        // Lógica matemática do Simulador
         function calcularImpacto() {
             const hectares = parseFloat(document.getElementById('hectares').value);
             const pratica = document.getElementById('pratica').value;
             
             if (isNaN(hectares) || hectares <= 0) {
-                alert('Por favor, insira um número válido de hectares.');
+                alert('Por favor, digite um número válido de hectares.');
                 return;
             }
 
@@ -135,47 +135,7 @@
 
             document.getElementById('co2Resultado').innerText = (hectares * fCO2).toLocaleString('pt-BR') + ' kg';
             document.getElementById('aguaResultado').innerText = (hectares * fAgua).toLocaleString('pt-BR') + ' L';
-            document.getElementById('resultadoPainel').style.display = 'grid';
-        }
-
-        // --- LÓGICA DO MAPA REAL ---
-        function initMap() {
-            // Inicializa focado no mapa do Brasil centralizado
-            map = L.map('mapa').setView([-14.235, -51.925], 4);
-            mapInitialized = true;
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 18,
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-
-            const pontos = [
-                { coords: [-22.56, -47.14], titulo: "Fazendas Verticais Hidropônicas", local: "Holambra - SP", icon: "🌱", desc: "Uso de inteligência artificial aplicada ao cultivo vertical indoor. Monitora nutrientes minuto a minuto sem desperdício de espaço ou recursos orgânicos.", impacto: "Economia garantida de 95% de água e eliminação total de defensivos químicos." },
-                { coords: [-12.15, -45.00], titulo: "Drones e Agro de Precisão", local: "Luís Eduardo Magalhães - BA", icon: "🛸", desc: "Frota de drones automáticos que sobrevoam plantações mapeando com precisão milimétrica focos de pragas e estresse hídrico.", impacto: "Redução comprovada de até 40% no desperdício de insumos agrícolas tradicionais." },
-                { coords: [-19.01, -49.46], titulo: "Polo de Integração (ILPF)", local: "Uberaba - MG", icon: "🌳", desc: "Consorciação planejada de grãos, gado e árvores nativas na mesma área, otimizando o ciclo de nitrogênio do solo.", impacto: "Neutralização das emissões de gases através do crescimento florestal acelerado." },
-                { coords: [-16.32, -48.95], titulo: "Usinas Agrivoltaicas", local: "Anápolis - GO", icon: "☀️", desc: "Painéis solares fotovoltaicos suspensos que geram energia limpa enquanto protegem cultivos de hortaliças do calor extremo.", impacto: "Geração distribuída 100% renovável e redução drástica da evapotranspiração do solo." }
-            ];
-
-            pontos.forEach(ponto => {
-                const marker = L.marker(ponto.coords).addTo(map);
-                marker.bindTooltip(`<b>${ponto.titulo}</b>`, { direction: 'top' });
-                marker.on('click', () => {
-                    document.getElementById('placeholderText').classList.add('hidden');
-                    const content = document.getElementById('panelContent');
-                    content.classList.remove('hidden');
-                    
-                    document.getElementById('infoIcon').innerText = ponto.icon;
-                    document.getElementById('infoTitulo').innerText = ponto.titulo;
-                    document.getElementById('infoLocal').innerText = ponto.local;
-                    document.getElementById('infoDesc').innerText = ponto.desc;
-                    document.getElementById('infoImpacto').innerText = ponto.impacto;
-
-                    map.setView(ponto.coords, 6, { animate: true });
-                });
-            });
-            
-            // Força o mapa a recalcular seu tamanho correto para não quebrar o layout flex
-            setTimeout(() => { map.invalidateSize(); }, 200);
+            document.getElementById('resultadoPainel').style.display = 'block';
         }
     </script>
 </body>
