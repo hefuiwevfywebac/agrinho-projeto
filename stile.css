@@ -1,11 +1,11 @@
 :root {
-    --primary: #4caf50;       /* Verde claro principal do agro */
-    --light-green: #e8f5e9;   /* Fundo verde suave */
-    --accent: #81c784;        /* Detalhes */
-    --dark-green: #2e7d32;    /* Contraste */
-    --text-dark: #263238;     
-    --white: #ffffff;         
-    --shadow: rgba(0, 0, 0, 0.15);
+    --primary: #4caf50;       /* Verde claro agro */
+    --light-green: #e8f5e9;   /* Fundo suave das caixas */
+    --accent: #81c784;        /* Linhas e bordas verdes */
+    --dark-green: #2e7d32;    /* Títulos e links em verde escuro */
+    --text-dark: #263238;     /* Cor para boa leitura do texto */
+    --white: #ffffff;         /* Branco puro para o painel */
+    --border: #e0e0e0;        
 }
 
 * {
@@ -18,128 +18,148 @@
 body, html {
     height: 100%;
     width: 100%;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
+}
+
+/* Topo do site limpo e profissional */
+.main-header {
+    background-color: var(--light-green);
+    color: var(--dark-green);
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+}
+
+.main-header h1 { font-size: 2.2rem; font-weight: 800; }
+.main-header p { color: var(--text-dark); font-size: 1.05rem; margin-top: 0.2rem; }
+
+/* Divisão perfeita da tela em duas partes */
+.dashboard-container {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    height: calc(100vh - 100px);
+}
+
+/* LADO ESQUERDO: Caixa de explicação e detalhes das tecnologias */
+.left-content {
+    flex: 1;
+    max-width: 450px;
+    min-width: 320px;
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    overflow-y: auto;
+    border-right: 2px solid var(--light-green);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* LADO DIREITO: O Mapa Geográfico Real */
+.right-map {
+    flex: 2;
+    height: 100%;
+    position: relative;
     background-color: #e0e0e0;
 }
 
-/* O mapa ocupa 100% do fundo da tela inteira */
 #mapa {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
+    height: 100%;
     z-index: 1;
 }
 
-/* Título Flutuante Centralizado no topo */
-.main-header {
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--white);
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    box-shadow: 0 4px 15px var(--shadow);
-    text-align: center;
-    z-index: 10;
-    border: 2px solid var(--primary);
-    pointer-events: auto;
-    width: auto;
-    max-width: 90%;
-}
+h2 { color: var(--dark-green); font-size: 1.5rem; margin-bottom: 0.5rem; }
 
-.main-header h1 { font-size: 1.5rem; color: var(--dark-green); font-weight: 800; }
-.main-header p { font-size: 0.85rem; color: var(--text-dark); }
-
-/* Estilo Base para os Painéis Laterais Flutuantes */
-.floating-panel {
-    position: absolute;
-    top: 100px; /* Alinhado abaixo do cabeçalho */
-    background-color: rgba(255, 255, 255, 0.95); /* Branco semi-transparente premium */
-    backdrop-filter: blur(5px);
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 25px var(--shadow);
-    z-index: 10;
-    width: 340px;
-    max-height: calc(100vh - 140px);
-    overflow-y: auto;
-    border: 1px solid var(--light-green);
-}
-
-/* Painel da Esquerda (Simulador) */
-.simulator-panel {
-    left: 20px;
-}
-
-/* Painel da Direita (Infos do Mapa) */
-.info-panel {
-    right: 20px;
-}
-
-/* Detalhes Internos dos Painéis */
-h2 { color: var(--dark-green); font-size: 1.25rem; margin-bottom: 0.8rem; border-bottom: 2px solid var(--light-green); padding-bottom: 0.4rem; }
-.panel-desc, .instruction { font-size: 0.85rem; color: #546e7a; line-height: 1.4; margin-bottom: 1rem; }
-
-.form-group { margin-bottom: 1rem; }
-label { display: block; margin-bottom: 0.4rem; font-weight: 700; font-size: 0.85rem; color: var(--dark-green); }
-
-input[type="number"], select {
-    width: 100%;
-    padding: 0.7rem;
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-    font-size: 0.9rem;
-    outline: none;
-}
-
-.btn-calc {
-    width: 100%;
-    background-color: var(--primary);
-    color: var(--white);
-    border: none;
-    padding: 0.8rem;
+/* Box de instruções para o usuário saber o que fazer */
+.instruction-box {
+    background-color: var(--light-green);
+    border-left: 4px solid var(--primary);
+    padding: 1.2rem;
+    border-radius: 6px;
     font-size: 0.95rem;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    margin-top: 0.8rem;
 }
-.btn-calc:hover { background-color: var(--dark-green); }
 
-/* Bloco de Resultados Matemáticos */
-.results { margin-top: 1.2rem; display: none; }
-.result-box { background: var(--light-green); padding: 0.8rem; border-radius: 8px; text-align: center; margin-bottom: 0.8rem; border-left: 4px solid var(--primary); }
-.result-box p { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); }
-.result-box span { display: block; font-size: 1.4rem; font-weight: 800; color: var(--dark-green); }
+.instruction-box p { margin-bottom: 0.5rem; }
+.instruction-box p:last-child { margin-bottom: 0; }
 
-/* Elementos Informativos do Mapa */
-.panel-placeholder { text-align: center; padding: 2rem 0; }
-.icon-pulse { font-size: 2.5rem; animation: pulse 2s infinite; display: inline-block; margin-top: 0.5rem; }
+/* Painel dinâmico que exibe os dados ao clicar no mapa */
+.dynamic-info {
+    background: var(--light-green);
+    padding: 1.8rem;
+    border-radius: 12px;
+    border: 1px solid var(--accent);
+    animation: fadeIn 0.4s ease-out;
+}
 
-.header-inline { display: flex; align-items: center; gap: 0.8rem; }
-.info-icon { font-size: 1.8rem; background: var(--light-green); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
-#infoTitulo { color: var(--dark-green); font-size: 1.15rem; }
-.location-tag { font-size: 0.8rem; color: #78909c; font-weight: bold; margin-top: 0.3rem; }
-.divider { height: 1px; background: var(--border); margin: 1rem 0; }
-#infoDesc { line-height: 1.5; font-size: 0.9rem; color: #455a64; }
-.impact-badge { background-color: var(--light-green); border-left: 4px solid var(--dark-green); padding: 0.8rem; margin-top: 1rem; border-radius: 4px; }
-.impact-badge strong { color: var(--dark-green); font-size: 0.75rem; display: block; margin-bottom: 0.2rem; text-transform: uppercase; }
-.impact-badge p { font-size: 0.85rem; }
+.info-icon-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-icon {
+    font-size: 2rem;
+    background: var(--white);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+}
+
+#infoTitulo { color: var(--dark-green); font-size: 1.3rem; }
+.location-tag { font-size: 0.9rem; color: #546e7a; font-weight: bold; margin-bottom: 1rem; }
+.divider { height: 1px; background: var(--accent); margin: 1.2rem 0; opacity: 0.5; }
+#infoDesc { font-size: 0.95rem; line-height: 1.6; color: var(--text-dark); }
+
+.impact-badge { 
+    background: var(--white); 
+    padding: 1rem; 
+    border-left: 4px solid var(--dark-green); 
+    margin-top: 1.5rem; 
+    border-radius: 4px; 
+}
+.impact-badge strong { font-size: 0.85rem; color: var(--dark-green); display: block; text-transform: uppercase; margin-bottom: 0.2rem; }
+#infoImpacto { font-size: 0.95rem; color: var(--text-dark); font-weight: 600; margin-top: 0.3rem; }
 
 .hidden { display: none !important; }
+
+.placeholder-text { 
+    text-align: center; 
+    color: #78909c; 
+    font-size: 1rem; 
+    padding: 2.5rem 0; 
+    border: 2px dashed var(--accent);
+    border-radius: 8px;
+}
+
+.icon-pulse { font-size: 2.5rem; display: block; margin-top: 0.5rem; animation: pulse 2s infinite; }
 
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.15); }
 }
 
-/* Responsividade Completa para Celulares */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Adaptação inteligente para telas de celular */
 @media (max-width: 768px) {
     body, html { overflow-y: auto; height: auto; }
-    #mapa { position: relative; height: 350px; width: 100%; }
-    .main-header { position: relative; top: 0; left: 0; transform: none; width: 100%; border-radius: 0; border: none; border-bottom: 2px solid var(--primary); max-width: 100%; }
-    .floating-panel { position: relative; top: 0; left: 0; right: 0; width: calc(100% - 30px); margin: 15px auto; max-height: none; background-color: var(--white); }
+    .dashboard-container { flex-direction: column; height: auto; }
+    .left-content { max-width: 100%; min-width: 100%; border-right: none; border-bottom: 2px solid var(--light-green); padding: 1.5rem; }
+    .right-map { height: 400px; width: 100%; }
 }
