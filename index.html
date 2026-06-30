@@ -8,7 +8,7 @@
     <!-- Link para o arquivo CSS externo -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- CSS essencial do mapa Leaflet (CORRIGIDO) -->
+    <!-- CSS essencial do mapa Leaflet (Obrigatório e Atualizado) -->
     <link rel="stylesheet" href="https://unpkg.com" />
 </head>
 <body>
@@ -38,19 +38,21 @@
                     <span class="icon-pulse">📍</span>
                 </div>
 
-                <!-- Painel dinâmico que recebe as informações do agro clicado -->
-                <div id="mapContent" class="dynamic-info hidden">
-                    <div class="info-icon-title">
-                        <span id="infoIcon" class="info-icon">🌱</span>
-                        <h3 id="infoTitulo">Tecnologia</h3>
-                    </div>
-                    <p class="location-tag">📍 <span id="infoLocal">Localização</span></p>
-                    <div class="divider"></div>
-                    <p id="infoDesc"></p>
-                    
-                    <div class="impact-badge">
-                        <strong>Impacto Ecológico Direto:</strong>
-                        <p id="infoImpacto"></p>
+                <!-- Painel dinâmico (Bloqueado com display:none para não carregar feio no GitHub) -->
+                <div id="mapContent" style="display: none;">
+                    <div class="dynamic-info">
+                        <div class="info-icon-title">
+                            <span id="infoIcon" class="info-icon">🌱</span>
+                            <h3 id="infoTitulo">Tecnologia</h3>
+                        </div>
+                        <p class="location-tag">📍 <span id="infoLocal">Localização</span></p>
+                        <div class="divider"></div>
+                        <p id="infoDesc"></p>
+                        
+                        <div class="impact-badge">
+                            <strong>Impacto Ecológico Direto:</strong>
+                            <p id="infoImpacto"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,7 +65,7 @@
 
     </div>
 
-    <!-- Script oficial do Leaflet para renderizar os mapas (CORRIGIDO) -->
+    <!-- Script oficial do Leaflet para renderizar os mapas -->
     <script src="https://unpkg.com"></script>
     <script>
         // Inicializa o mapa focado nas proporções centrais do Brasil
@@ -87,11 +89,10 @@
             const marker = L.marker(ponto.coords).addTo(map);
             marker.bindTooltip(`<b>${ponto.titulo}</b>`, { direction: 'top' });
             
-            // Lógica do clique: limpa o texto padrão e injeta os dados reais
+            // Lógica do clique: alterna a exibição dos blocos na tela
             marker.on('click', () => {
-                document.getElementById('placeholderMap').classList.add('hidden');
-                const content = document.getElementById('mapContent');
-                content.classList.remove('hidden');
+                document.getElementById('placeholderMap').style.display = 'none';
+                document.getElementById('mapContent').style.display = 'block';
                 
                 document.getElementById('infoIcon').innerText = ponto.icon;
                 document.getElementById('infoTitulo').innerText = ponto.titulo;
