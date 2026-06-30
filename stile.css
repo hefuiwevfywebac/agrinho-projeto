@@ -33,70 +33,91 @@ body, html {
     border-bottom: 2px solid var(--accent);
 }
 
-.main-header h1 { font-size: 2.2rem; font-weight: 800; }
-.main-header p { color: var(--text-dark); font-size: 1.05rem; margin-top: 0.2rem; }
+.main-header h1 { 
+    font-size: 2.2rem; 
+    font-weight: 800; 
+}
+
+.main-header p { 
+    color: var(--text-dark); 
+    font-size: 1.05rem; 
+    margin-top: 0.2rem; 
+}
 
 /* Divisão perfeita da tela em duas partes */
 .dashboard-container {
     display: flex;
     flex: 1;
     width: 100%;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 110px); /* Ajustado para compensar a altura exata do header */
 }
 
-/* LADO ESQUERDO: Caixa de explicação e detalhes das tecnologias */
+/* LADO ESQUERDO: Caixa de explicação e detalhes */
 .left-content {
     flex: 1;
     max-width: 450px;
-    min-width: 320px;
+    min-width: 350px;
     background: var(--white);
-    padding: 2.5rem 2rem;
+    padding: 2rem;
     overflow-y: auto;
     border-right: 2px solid var(--light-green);
+}
+
+.section-block {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
-/* LADO DIREITO: O Mapa Geográfico Real */
-.right-map {
-    flex: 2;
-    height: 100%;
-    position: relative;
-    background-color: #e0e0e0;
+h2 { 
+    color: var(--dark-green); 
+    font-size: 1.5rem; 
+    margin-bottom: 0.2rem; 
 }
 
-#mapa {
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-h2 { color: var(--dark-green); font-size: 1.5rem; margin-bottom: 0.5rem; }
-
-/* Box de instruções para o usuário saber o que fazer */
+/* Caixa de instruções didáticas */
 .instruction-box {
     background-color: var(--light-green);
     border-left: 4px solid var(--primary);
-    padding: 1.2rem;
-    border-radius: 6px;
+    padding: 1rem;
+    border-radius: 4px;
     font-size: 0.95rem;
-    line-height: 1.6;
+    line-height: 1.4;
     color: var(--text-dark);
-    margin-bottom: 2rem;
-    margin-top: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.instruction-box p { margin-bottom: 0.5rem; }
-.instruction-box p:last-child { margin-bottom: 0; }
+/* Estado inicial de espera */
+.placeholder-text {
+    text-align: center;
+    padding: 3rem 1rem;
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    color: #546e7a;
+}
 
-/* Painel dinâmico que exibe os dados ao clicar no mapa */
+.icon-pulse {
+    display: inline-block;
+    font-size: 2rem;
+    margin-top: 1rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Painel dinâmico de informações pós-clique */
 .dynamic-info {
-    background: var(--light-green);
-    padding: 1.8rem;
-    border-radius: 12px;
-    border: 1px solid var(--accent);
-    animation: fadeIn 0.4s ease-out;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .info-icon-title {
@@ -107,59 +128,68 @@ h2 { color: var(--dark-green); font-size: 1.5rem; margin-bottom: 0.5rem; }
 }
 
 .info-icon {
-    font-size: 2rem;
-    background: var(--white);
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
+    font-size: 1.8rem;
+}
+
+#infoTitulo {
+    color: var(--dark-green);
+    font-size: 1.3rem;
+}
+
+.location-tag {
+    font-size: 0.9rem;
+    color: #546e7a;
+    font-weight: 600;
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: 1rem 0;
+}
+
+#infoDesc {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+/* Badge de destaque ecológico */
+.impact-badge {
+    background-color: #f1f8e9;
     border: 1px solid var(--accent);
+    padding: 1rem;
+    border-radius: 6px;
 }
 
-#infoTitulo { color: var(--dark-green); font-size: 1.3rem; }
-.location-tag { font-size: 0.9rem; color: #546e7a; font-weight: bold; margin-bottom: 1rem; }
-.divider { height: 1px; background: var(--accent); margin: 1.2rem 0; opacity: 0.5; }
-#infoDesc { font-size: 0.95rem; line-height: 1.6; color: var(--text-dark); }
-
-.impact-badge { 
-    background: var(--white); 
-    padding: 1rem; 
-    border-left: 4px solid var(--dark-green); 
-    margin-top: 1.5rem; 
-    border-radius: 4px; 
-}
-.impact-badge strong { font-size: 0.85rem; color: var(--dark-green); display: block; text-transform: uppercase; margin-bottom: 0.2rem; }
-#infoImpacto { font-size: 0.95rem; color: var(--text-dark); font-weight: 600; margin-top: 0.3rem; }
-
-.hidden { display: none !important; }
-
-.placeholder-text { 
-    text-align: center; 
-    color: #78909c; 
-    font-size: 1rem; 
-    padding: 2.5rem 0; 
-    border: 2px dashed var(--accent);
-    border-radius: 8px;
+.impact-badge strong {
+    color: var(--dark-green);
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.3rem;
 }
 
-.icon-pulse { font-size: 2.5rem; display: block; margin-top: 0.5rem; animation: pulse 2s infinite; }
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
+.impact-badge p {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    line-height: 1.4;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Classe utilitária para esconder elementos */
+.hidden {
+    display: none !important;
 }
 
-/* Adaptação inteligente para telas de celular */
-@media (max-width: 768px) {
-    body, html { overflow-y: auto; height: auto; }
-    .dashboard-container { flex-direction: column; height: auto; }
-    .left-content { max-width: 100%; min-width: 100%; border-right: none; border-bottom: 2px solid var(--light-green); padding: 1.5rem; }
-    .right-map { height: 400px; width: 100%; }
+/* LADO DIREITO: O Mapa Geográfico Real */
+.right-map {
+    flex: 2;
+    height: 100%;
+    position: relative;
+}
+
+#mapa {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
