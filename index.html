@@ -15,19 +15,18 @@
         <p>Inovação, Produtividade e Tecnologia Ambiental para o Campo</p>
     </header>
 
-    <!-- Barra de Navegação Superior estilo Dashboard -->
+    <!-- Barra de Navegação Superior centralizada -->
     <nav class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('simulador')">📊 Simulador de Impacto</button>
         <button class="tab-btn" onclick="switchTab('mapa-aba')">🗺️ Mapa do Futuro Real</button>
     </nav>
 
-    <!-- CONTAINER DA ABA 1: SIMULADOR -->
+    <!-- CONTAINER DA ABA 1: SIMULADOR (Totalmente centralizado na tela) -->
     <main id="simulador" class="tab-content active-content">
-        <div class="container">
+        <div class="center-container">
             <section class="card">
                 <h2>Simulador de Impacto Agro Sustentável</h2>
                 
-                <!-- Texto explicativo sobre o que é e o que fazer -->
                 <div class="instruction-box">
                     <p><strong>O que é:</strong> Uma ferramenta matemática que projeta os benefícios ambientais de métodos agrícolas modernos.</p>
                     <p><strong>O que fazer:</strong> Digite o tamanho da sua área produtiva em hectares, escolha a prática sustentável aplicada e clique em calcular para ver a estimativa de CO₂ retido e água economizada.</p>
@@ -63,17 +62,18 @@
         </div>
     </main>
 
-    <!-- CONTAINER DA ABA 2: MAPA GEOGRÁFICO -->
+    <!-- CONTAINER DA ABA 2: MAPA GEOGRÁFICO (Organizado Lado a Lado de verdade) -->
     <main id="mapa-aba" class="tab-content">
-        <!-- Texto explicativo sobre o que é e o que fazer no mapa -->
         <div class="map-instruction">
             <p><strong>O que é o Mapa do Futuro Real:</strong> Um mapa interativo geográfico que conecta você aos polos e usinas agrícolas reais mais avançados do Brasil.</p>
             <p><strong>O que fazer:</strong> Navegue pelo território brasileiro e <strong>clique nos marcadores azuis</strong> instalados no mapa para abrir os dados detalhados e o impacto ecológico de cada região no painel ao lado.</p>
         </div>
 
-        <div class="map-container">
+        <div class="map-dashboard-layout">
+            <!-- O mapa fica do lado esquerdo -->
             <div id="mapa"></div>
 
+            <!-- O painel fica do lado direito de forma limpa e isolada -->
             <aside class="info-panel" id="painelInfo">
                 <div class="panel-placeholder" id="placeholderText">
                     <span class="icon-pulse">📍</span>
@@ -140,6 +140,7 @@
 
         // --- LÓGICA DO MAPA REAL ---
         function initMap() {
+            // Inicializa focado no mapa do Brasil centralizado
             map = L.map('mapa').setView([-14.235, -51.925], 4);
             mapInitialized = true;
 
@@ -169,9 +170,12 @@
                     document.getElementById('infoDesc').innerText = ponto.desc;
                     document.getElementById('infoImpacto').innerText = ponto.impacto;
 
-                    map.setView(ponto.coords, 7, { animate: true });
+                    map.setView(ponto.coords, 6, { animate: true });
                 });
             });
+            
+            // Força o mapa a recalcular seu tamanho correto para não quebrar o layout flex
+            setTimeout(() => { map.invalidateSize(); }, 200);
         }
     </script>
 </body>
