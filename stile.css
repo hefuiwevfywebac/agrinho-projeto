@@ -21,7 +21,7 @@ body, html {
     background-color: var(--white);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: hidden; /* Evita que o site todo ganhe barra de rolagem */
 }
 
 /* Topo do site limpo e profissional */
@@ -49,7 +49,8 @@ body, html {
     display: flex;
     flex: 1;
     width: 100%;
-    height: calc(100vh - 110px); 
+    /* CORREÇÃO PREVENTIVA: calc(100vh - altura_aproximada_do_header) */
+    height: calc(100vh - 120px); 
 }
 
 /* LADO ESQUERDO: Painel de Informações */
@@ -59,7 +60,7 @@ body, html {
     min-width: 350px;
     background: var(--white);
     padding: 2rem;
-    overflow-y: auto;
+    overflow-y: auto; /* Cria barra de rolagem só na esquerda se o texto crescer */
     border-right: 2px solid var(--light-green);
 }
 
@@ -196,5 +197,13 @@ h2 {
 #mapa {
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 1; /* Garante que o mapa fique na camada correta */
+}
+
+/* Ajuste Responsivo para telas pequenas (Celulares) */
+@media (max-width: 768px) {
+    body, html { overflow: visible; height: auto; }
+    .dashboard-container { flex-direction: column-reverse; height: auto; }
+    .left-content { max-width: 100%; min-width: 100%; }
+    .right-map { height: 400px; }
 }
