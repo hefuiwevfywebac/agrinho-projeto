@@ -3,72 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroForte: Mapa do Futuro</title>
-    
-    <!-- Link para o CSS do Leaflet (Mapa) -->
-    <link rel="stylesheet" href="https://unpkg.com" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    
-    <!-- Link para o seu arquivo CSS externo -->
-    <link rel="stylesheet" href="style.css">
+    <title>AgroForte: Futuro Sustentável</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        /* Paleta de Cores: Verde Agro e Branco */
+        :root {
+            --verde-escuro: #1b4d3e;
+            --verde-principal: #2c6b56;
+            --verde-claro: #e8f5e9;
+            --branco: #ffffff;
+            --cinza-claro: #f4f7f5;
+            --texto: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--cinza-claro);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--verde-escuro);
+            color: var(--branco);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* Conteúdo Principal */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Seção de Texto/Artigo */
+        .info-section {
+            background: var(--branco);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--verde-principal);
+        }
+
+        .info-section h2 {
+            color: var(--verde-escuro);
+            margin-bottom: 1rem;
+        }
+
+        .info-section p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        /* Seção do Mapa e Clima */
+        .map-section {
+            background: var(--branco);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--verde-principal);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-section h2 {
+            color: var(--verde-escuro);
+            margin-bottom: 1rem;
+        }
+
+        #map {
+            height: 350px;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border: 2px solid var(--verde-claro);
+            z-index: 1;
+        }
+
+        /* Painel de Informações do Clima */
+        .weather-display {
+            background-color: var(--verde-claro);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--verde-principal);
+        }
+
+        .weather-display h3 {
+            color: var(--verde-escuro);
+            margin-bottom: 0.5rem;
+        }
+
+        .weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .weather-details span {
+            font-weight: bold;
+            color: var(--verde-principal);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--verde-escuro);
+            color: var(--branco);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <h1>AgroForte</h1>
-        <p>Inovação, Tecnologia e o Verdadeiro Mapa do Futuro Sustentável</p>
+    <header>
+        <h1>AgroForte: Futuro Sustentável</h1>
+        <p>Inovação, tecnologia e respeito ao meio ambiente no campo</p>
     </header>
 
-    <div class="dashboard-container">
-        
-        <!-- LADO ESQUERDO: INSTRUÇÕES E EXPLICATIVOS DO MAPA -->
-        <aside class="left-content">
-            <div class="section-block">
-                <h2>🗺️ O Mapa do Futuro</h2>
-                
-                <!-- Guia didático do que é e como interagir -->
-                <div class="instruction-box">
-                    <p><strong>O que é este mapa:</strong> Um guia interativo geográfico desenvolvido para conectar você aos polos reais de maior impacto ecológico e inovação do agro brasileiro.</p>
-                    <p><strong>O que fazer:</strong> Navegue livremente pelo mapa do Brasil posicionado à direita e <strong>clique nos marcadores azuis</strong> na tela para carregar os dados, explicações e o impacto ambiental direto daquela região.</p>
-                </div>
-                
-                <!-- Texto que aparece antes de clicar em um ponto -->
-                <div id="placeholderMap" class="placeholder-text">
-                    <p>Aguardando sua interação...</p>
-                    <p style="font-size: 0.85rem; margin-top: 0.3rem; color: #78909c;">Escolha um marcador azul no mapa para revelar os detalhes.</p>
-                    <span class="icon-pulse">📍</span>
-                </div>
+    <main>
+        <section class="info-section">
+            <h2>O Futuro da Agricultura é Sustentável</h2>
+            <p>O projeto <strong>AgroForte</strong> nasce com a missão de unir a produtividade agrícola à preservação ambiental. Diante dos desafios climáticos globais, o manejo inteligente do solo, o uso racional da água e a rotação de culturas deixaram de ser diferenciais e tornaram-se necessidades urgentes.</p>
+            <p>Utilizar a tecnologia a favor do produtor permite antecipar cenários e tomar decisões baseadas em dados. Entender se o tempo estará seco, úmido ou chuvoso ajuda a economizar recursos, proteger a biodiversidade e garantir a segurança alimentar das próximas gerações.</p>
+            <p><em>Clique em qualquer local do mapa ao lado para planejar seu manejo de acordo com o clima em tempo real!</em></p>
+        </section>
 
-                <!-- Painel dinâmico -->
-                <div id="mapContent" style="display: none;">
-                    <div class="dynamic-info">
-                        <div class="info-icon-title">
-                            <span id="infoIcon" class="info-icon">🌱</span>
-                            <h3 id="infoTitulo">Tecnologia</h3>
-                        </div>
-                        <p class="location-tag">📍 <span id="infoLocal">Localização</span></p>
-                        <div class="divider"></div>
-                        <p id="infoDesc"></p>
-                        
-                        <div class="impact-badge">
-                            <strong>Impacto Ecológico Direto:</strong>
-                            <p id="infoImpacto"></p>
-                        </div>
-                    </div>
+        <section class="map-section">
+            <h2>Monitoramento Agroclimático</h2>
+            <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">Selecione uma região no mapa para verificar as condições de umidade e chuva:</p>
+            
+            <div id="map"></div>
+
+            <div class="weather-display" id="weather-box">
+                <h3 id="location-name">Selecione um ponto no mapa</h3>
+                <div class="weather-details">
+                    <div>Status: <span id="weather-desc">-</span></div>
+                    <div>Temperatura: <span id="weather-temp">-</span></div>
+                    <div>Umidade: <span id="weather-humidity">-</span></div>
+                    <div>Chuva (Vol. Recente): <span id="weather-rain">-</span></div>
                 </div>
             </div>
-        </aside>
+        </section>
+    </main>
 
-        <!-- LADO DIREITO: MAPA GEOGRÁFICO INTERATIVO -->
-        <main class="right-map">
-            <div id="mapa"></div>
-        </main>
+    <footer>
+        <p>&copy; 2026 AgroForte Futuro Sustentável. Desenvolvido para um campo mais forte e verde.</p>
+    </footer>
 
-    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Inicializa o mapa centralizado no Brasil
+        const map = L.map('map').setView([-14.235, -51.925], 4);
 
-    <!-- Script oficial do Leaflet para renderizar os mapas -->
-    <script src="https://unpkg.com" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    
-    <!-- Link para o seu arquivo JavaScript externo -->
-    <script src="script.js"></script>
+        // Adiciona a camada visual do mapa (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Marcador visual no mapa
+        let marker;
+
+        // Chave pública de demonstração para a API de clima (OpenWeatherMap)
+        const apiKey = 'b35520e5413ed9fd5600cb8126e3c0f4';
+
+        // Função para buscar o clima usando Latitude e Longitude
+        async function fetchWeather(lat, lng) {
+            try {
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric&lang=pt_br`);
+                const data = await response.json();
+
+                if (data.cod === 200) {
+                    // Atualiza a interface com os dados reais
+                    document.getElementById('location-name').innerText = `${data.name || 'Região Selecionada'}, ${data.sys.country || ''}`;
+                    document.getElementById('weather-desc').innerText = data.weather[0].description.toUpperCase();
+                    document.getElementById('weather-temp').innerText = `${Math.round(data.main.temp)}°C`;
+                    document.getElementById('weather-humidity').innerText = `${data.main.humidity}%`;
+                    
+                    // Verifica se está chuvoso e mostra o volume se disponível
+                    if (data.rain && data.rain['1h']) {
+                        document.getElementById('weather-rain').innerText = `${data.rain['1h']} mm (Última hora)`;
+                    } else if (data.rain && data.rain['3h']) {
+                        document.getElementById('weather-rain').innerText = `${data.rain['3h']} mm (Últimas 3h)`;
+                    } else {
+                        document.getElementById('weather-rain').innerText = 'Sem chuva recente';
+                    }
+                } else {
+                    alert('Não foi possível obter dados para este local.');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar dados climáticos:', error);
+                document.getElementById('location-name').innerText = 'Erro ao carregar dados.';
+            }
+        }
+
+        // Evento de clique no mapa
+        map.on('click', function(e) {
+            const lat = e.latlng.lat;
+            const lng = e.latlng.lng;
+
+            // Se já existir um marcador, remove ele para colocar o novo
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            // Adiciona o novo marcador onde o usuário clicou
+            marker = L.marker([lat, lng]).addTo(map);
+
+            // Avisa no painel que está carregando
+            document.getElementById('location-name').innerText = "Carregando dados climáticos...";
+            
+            // Chama a API de clima
+            fetchWeather(lat, lng);
+        });
+
+        // Carrega o clima de um ponto inicial (Brasília) assim que o site abre
+        const initialLat = -15.7801;
+        const initialLng = -47.9292;
+        marker = L.marker([initialLat, initialLng]).addTo(map);
+        fetchWeather(initialLat, initialLng);
+    </script>
 </body>
 </html>
