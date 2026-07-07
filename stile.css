@@ -28,7 +28,7 @@ body, html {
 .main-header {
     background-color: var(--light-green);
     color: var(--dark-green);
-    padding: 1.5rem;
+    padding: 20px;
     text-align: center;
     border-bottom: 2px solid var(--accent);
 }
